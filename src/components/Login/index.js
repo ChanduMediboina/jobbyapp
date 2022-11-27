@@ -15,9 +15,13 @@ class LoginForm extends Component {
     this.setState({password: event.target.value})
   }
 
-  onSuccessSubmit = jwtToken => {
+  onSuccessSubmit = () => {
     const {history} = this.props
-    Cookies.set('jwt_token', jwtToken, {expires: 3})
+    Cookies.set(
+      'jwt_token',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJhaHVsIiwicm9sZSI6IlBSSU1FX1VTRVIiLCJpYXQiOjE2MjMwNjU1MzJ9.D13s5wN3Oh59aa_qtXMo3Ec4wojOx0EZh8Xr5C5sRkU',
+      {expires: 3},
+    )
     history.replace('/')
   }
 
@@ -40,7 +44,7 @@ class LoginForm extends Component {
     const data = await response.json()
 
     if (response.ok === true) {
-      this.onSuccessSubmit(data.jwt_token)
+      this.onSuccessSubmit()
     } else {
       this.setState({errorMsg: data.user_msg})
     }

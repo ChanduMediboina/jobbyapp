@@ -35,6 +35,7 @@ class JobDetailedView extends Component {
     const {id} = params
 
     const jwtToken = Cookies.get('jwt_token')
+
     const url = `https://apis.ccbp.in/jobs/${id}`
     const options = {
       method: 'GET',

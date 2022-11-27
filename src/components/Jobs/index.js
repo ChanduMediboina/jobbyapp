@@ -72,18 +72,23 @@ class Jobs extends Component {
 
   getJobsData = async () => {
     this.setState({apiStatus: apiRequest.inProgress})
+
     const jwtToken = Cookies.get('jwt_token')
+
+    console.log(
+      jwtToken ===
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJhaHVsIiwicm9sZSI6IlBSSU1FX1VTRVIiLCJpYXQiOjE2MjMwNjU1MzJ9.D13s5wN3Oh59aa_qtXMo3Ec4wojOx0EZh8Xr5C5sRkU',
+    )
 
     const {typeOfJob, addUserSearchInputToApi, salaryLimit} = this.state
 
-    console.log(addUserSearchInputToApi)
+    // console.log(addUserSearchInputToApi)
     const options = {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${jwtToken}`,
       },
     }
-
     const jobsUrl = `https://apis.ccbp.in/jobs?employment_type=${typeOfJob}&minimum_package=${salaryLimit}&search=${addUserSearchInputToApi}`
     const jobsApiResponse = await fetch(jobsUrl, options)
 
@@ -112,6 +117,7 @@ class Jobs extends Component {
 
   getProfile = async () => {
     const jwtToken = Cookies.get('jwt_token')
+
     const option = {
       method: 'GET',
       headers: {
@@ -166,7 +172,7 @@ class Jobs extends Component {
   }
 
   filterJobBasedOnJobType = id => {
-    console.log(id)
+    // console.log(id)
     this.setState(
       {
         typeOfJob: id,
@@ -176,7 +182,7 @@ class Jobs extends Component {
   }
 
   filterJobBasedOnSalary = id => {
-    console.log(id)
+    // console.log(id)
     this.setState({salaryLimit: id}, this.getJobsData)
   }
 
@@ -192,7 +198,7 @@ class Jobs extends Component {
   onSuccessApi = () => {
     const {jobsList} = this.state
     const findNumberOfJobs = jobsList.length
-    console.log(findNumberOfJobs)
+    // console.log(findNumberOfJobs)
     return (
       <>
         {findNumberOfJobs > 0

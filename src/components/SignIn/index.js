@@ -71,6 +71,13 @@ class SignIn extends Component {
           <button type="submit" className="login-btn">
             Create
           </button>
+          {userMsg === 'User created successfully' && (
+            <Link to="/login">
+              <button type="button" className="login">
+                Login
+              </button>
+            </Link>
+          )}
           <p className="errorMsg">{errorMsg}</p>
           <p className="success-signin">{userMsg}</p>
         </form>
