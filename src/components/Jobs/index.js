@@ -2,7 +2,6 @@ import {Component} from 'react'
 import Cookies from 'js-cookie'
 import {BsSearch} from 'react-icons/bs'
 import Loader from 'react-loader-spinner'
-
 import Header from '../Header'
 import JobItem from '../JobItem'
 import SalaryRange from '../SalaryRange'
@@ -147,8 +146,8 @@ class Jobs extends Component {
         {shortBio !== undefined ? (
           <div className="profile-container">
             <img className="profile-img" alt="profile" src={profileImageUrl} />
-            <h1 className="name">{name}</h1>
-            <p className="bio">{shortBio}</p>
+            <h1 className="name">Chandra sekhar</h1>
+            <p className="bio">Aspiring Full-stack developer</p>
           </div>
         ) : (
           <button type="button" className="login-btn">

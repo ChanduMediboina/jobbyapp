@@ -1,5 +1,10 @@
 import {Component} from 'react'
+
 import {Link} from 'react-router-dom'
+
+import {createUserWithEmailAndPassword} from 'firebase/auth'
+import auth from '../Firebase'
+
 import './index.css'
 
 class SignIn extends Component {
@@ -31,28 +36,30 @@ class SignIn extends Component {
   onSubmitBtn = async event => {
     event.preventDefault()
     const {username, location, gender, password} = this.state
-    const userDetails = {
-      username,
-      location,
-      gender,
-      password,
-    }
-    const url = 'https://sekharslogin.herokuapp.com/register/'
-    const options = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(userDetails),
-    }
-    const signResponse = await fetch(url, options)
-    const signData = await signResponse.json()
-    console.log(signData)
-    if (signResponse.ok === true) {
-      this.setState({userMsg: signData.user_msg, errorMsg: ''})
-    } else {
-      this.setState({errorMsg: signData.error_msg, userMsg: ''})
-    }
+    createUserWithEmailAndPassword(auth, username, password)
+      .then(() => {
+        alert('User Created Successfully')
+      })
+      .catch(() => {
+        alert('Invalid Email or Password')
+      })
+
+    // const url = 'https://sekharslogin.herokuapp.com/register/'
+    // const options = {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify(userDetails),
+    // }
+    // const signResponse = await fetch(url, options)
+    // const signData = await signResponse.json()
+
+    // if (signResponse.ok === true) {
+    //   this.setState({userMsg: signData.user_msg, errorMsg: ''})
+    // } else {
+    //   this.setState({errorMsg: signData.error_msg, userMsg: ''})
+    // }
   }
 
   render() {
@@ -61,23 +68,41 @@ class SignIn extends Component {
       <div className="sign-in-container">
         <form className="sign-inform-container" onSubmit={this.onSubmitBtn}>
           <label htmlFor="name">username</label>
-          <input onChange={this.getUsername} type="text" id="name" />
+          <input
+            onChange={this.getUsername}
+            placeholder="Email"
+            type="text"
+            id="name"
+          />
           <label htmlFor="gender">Gender</label>
-          <input onChange={this.getGender} type="text" id="gender" />
+          <input
+            onChange={this.getGender}
+            placeholder="Gender"
+            type="text"
+            id="gender"
+          />
           <label htmlFor="location">Location</label>
-          <input onChange={this.getLocation} type="text" id="location" />
+          <input
+            onChange={this.getLocation}
+            placeholder="Location"
+            type="text"
+            id="location"
+          />
           <label htmlFor="password">Create Password</label>
-          <input onChange={this.getPassword} type="password" id="password" />
-          <button type="submit" className="login-btn">
+          <input
+            onChange={this.getPassword}
+            placeholder="Create Password"
+            type="password"
+            id="password"
+          />
+          <button type="submit" className="sign-in-btn">
             Create
           </button>
-          {userMsg === 'User created successfully' && (
-            <Link to="/login">
-              <button type="button" className="login">
-                Login
-              </button>
-            </Link>
-          )}
+          <Link to="/login">
+            <button type="button" className="login">
+              Login
+            </button>
+          </Link>
           <p className="errorMsg">{errorMsg}</p>
           <p className="success-signin">{userMsg}</p>
         </form>

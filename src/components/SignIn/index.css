@@ -1,12 +1,12 @@
 .sign-in-container {
-  background-color: #475569;
+  background-color: #f1f7ff;
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .sign-inform-container {
-  background-color: #2c364c;
+  background-color: #1d1d1f;
   padding: 30px;
   border-radius: 5px;
   display: flex;
@@ -15,7 +15,7 @@
   align-items: flex-start;
 }
 input {
-  color: #fff;
+  color: #ffffff;
 }
 .success-signin {
   font-family: Arial, Helvetica, sans-serif;
@@ -24,6 +24,14 @@ input {
   color: green;
   line-height: 0;
 }
+.sign-in-btn {
+  border: none;
+  background-color: #326bfc;
+  padding: 10px;
+  color: #fff;
+  border-radius: 10px;
+  margin-top: 10px;
+}
 .errorMsg {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 16px;
@@ -31,8 +39,11 @@ input {
   color: red;
 }
 .login {
-  color: dodgerblue;
+  color: rgb(67, 184, 252);
   border: none;
   background-color: transparent;
   padding-top: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: 500;
 }

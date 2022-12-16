@@ -1,6 +1,12 @@
 import {Component} from 'react'
+
 import Cookies from 'js-cookie'
+
 import {Redirect, Link} from 'react-router-dom'
+
+import {signInWithEmailAndPassword} from 'firebase/auth'
+
+import auth from '../Firebase'
 
 import './index.css'
 
@@ -29,25 +35,37 @@ class LoginForm extends Component {
     event.preventDefault()
     const {username, password} = this.state
     const userDetails = {username, password}
+    signInWithEmailAndPassword(auth, username, password)
+      .then(() => {
+        this.onSuccessSubmit()
+      })
+      .catch(() => {
+        alert('Invalid Email or Password')
+      })
 
-    const options = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(userDetails),
-    }
-    const url = 'https://sekharslogin.herokuapp.com/login'
+    // const url = 'https://apis.ccbp.in/login'
+    // const options = {
+    //   method: 'POST',
+    //   body: JSON.stringify(userDetails),
+    // }
+    // const url = 'https://sekharslogin.herokuapp.com/login'
+    //   const options = {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify(userDetails),
+    // }
 
-    const response = await fetch(url, options)
+    // const response = await fetch(url, options)
 
-    const data = await response.json()
+    // const data = await response.json()
 
-    if (response.ok === true) {
-      this.onSuccessSubmit()
-    } else {
-      this.setState({errorMsg: data.user_msg})
-    }
+    // if (response.ok === true) {
+    //   this.onSuccessSubmit()
+    // } else {
+    //   this.setState({errorMsg: data.error_msg})
+    // }
   }
 
   render() {
@@ -70,7 +88,7 @@ class LoginForm extends Component {
               onChange={this.getUsername}
               type="text"
               id="username"
-              placeholder="Username"
+              placeholder="Email"
             />
             <label htmlFor="password">Password</label>
             <input

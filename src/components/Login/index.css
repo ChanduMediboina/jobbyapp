@@ -46,6 +46,7 @@ input {
   color: #fff;
   padding: 10px;
   margin-top: 10px;
+  cursor: pointer;
 }
 button {
   cursor: pointer;
@@ -56,6 +57,7 @@ button {
 .sigin-btn {
   background-color: transparent;
   border: none;
-  color: blue;
+  color: rgb(125, 125, 255);
   padding-top: 10px;
+  cursor: pointer;
 }
